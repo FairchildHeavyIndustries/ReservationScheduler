@@ -13,7 +13,7 @@ script:
   - node_modules/.bin/karma start test/karma.conf.js --no-auto-watch --single-run --reporters=dots --browsers=Firefox
   - node_modules/.bin/protractor test/protractor-conf.js --browser=firefox
   
-  after_success:
+after_success:
   - mkdir /home/travis/tmp
   - sudo $(which npm) install -g firebase-tools
   - if [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then echo -e "${FIREBASE_EMAIL}\n${FIREBASE_PASSWORD}" | firebase deploy; fi
