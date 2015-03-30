@@ -1,0 +1,9 @@
+{
+  "firebase": "fairchild-res-sched",
+  "public": "app",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
