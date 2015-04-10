@@ -1,9 +1,15 @@
 <h2>Home</h2>
 
-<p class="status good" ng-show="loggedIn">Welcome Mr. "Vegas" Flores! You are logged in with id {{user.uid}}.</p>
-<p class="status" ng-hide="loggedIn">Welcome. You are not <a href="#/login">logged in</a></p>
+<p class="status" ng-if="!loggedIn"><a href="#/login">{{"log_in"|translate}}</a>
+</p>
+<div ng-if="loggedIn" <p>{{"Welcome" | translate}} {{profile.name}}!</p>
 
-<input ng-model="syncedValue.$value" type="text" ng-change="syncedValue.$save()" /> <b>{{syncedValue.$value}}</b>
+<h3>{{"Providers" | translate}}</h3>
+    <ul ng-repeat="provider in providers">
+        <li>
+            <a href="#/provider/update/{{provider.key}}">{{provider.name}}</a>
+        </li>
+    </ul>
 
-<p>Open <a ng-href="{{FBURL}}/syncedValue" target="_blank">Forge</a> or a <a target="_blank" href="#/">new window</a> to see this input update in real time.</p>
-
+    <a href="#/provider/create">{{"Add_Provider" | translate}}</a>
+</div>

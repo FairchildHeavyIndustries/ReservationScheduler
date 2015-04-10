@@ -14,10 +14,10 @@ module.exports = function(config){
       'app/config.js',
       'app/components/**/*.js',
       'app/account/**/*.js',
-      'app/chat/**/*.js',
       'app/home/**/*.js',
       'app/login/**/*.js',
-      'app/config_test.js'
+      'app/config_test.js',
+      'app/navMenu/**/*.js'
     ],
 
     autoWatch : true,
@@ -25,10 +25,12 @@ module.exports = function(config){
     frameworks: ['jasmine'],
 
     browsers : ['Chrome'],
+    hostname: process.env.IP,
+    port: process.env.PORT,
 
     plugins : [
-            'karma-chrome-launcher',
-            'karma-firefox-launcher',
+            //'karma-chrome-launcher',
+            //'karma-firefox-launcher',
             'karma-jasmine',
             'karma-junit-reporter'
             ],

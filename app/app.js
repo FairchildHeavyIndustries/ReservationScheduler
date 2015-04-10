@@ -1,13 +1,14 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('myApp', [
-    'myApp.config',
-    'myApp.security',
-    'myApp.home',
-    'myApp.account',
-    'myApp.chat',
-    'myApp.login'
+angular.module('frsApp', [
+    'frsApp.config',
+    'frsApp.security',
+    'frsApp.navMenu',
+    'frsApp.home',
+    'frsApp.account',
+    'frsApp.login',
+    'frsApp.provider'
   ])
 
   .run(['$rootScope', 'Auth', function($rootScope, Auth) {

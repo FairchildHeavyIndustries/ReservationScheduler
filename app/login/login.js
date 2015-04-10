@@ -1,5 +1,5 @@
 "use strict";
-angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
+angular.module('frsApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/login', {
@@ -8,7 +8,8 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
     });
   }])
 
-  .controller('LoginCtrl', ['$scope', 'Auth', '$location', 'fbutil', function($scope, Auth, $location, fbutil) {
+  .controller('LoginCtrl', ['$scope', 'Auth', '$location', 'fbutil', 'APPNAME',
+                    function($scope, Auth, $location, fbutil, APPNAME) {
     $scope.email = null;
     $scope.pass = null;
     $scope.confirm = null;
@@ -18,7 +19,7 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
       $scope.err = null;
       Auth.$authWithPassword({ email: email, password: pass }, {rememberMe: true})
         .then(function(/* user */) {
-          $location.path('/account');
+          $location.path('/home');
         }, function(err) {
           $scope.err = errMessage(err);
         });
@@ -39,7 +40,13 @@ angular.module('myApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
             // create a user profile in our data store
             var ref = fbutil.ref('users', user.uid);
             return fbutil.handler(function(cb) {
-              ref.set({email: email, name: name||firstPartOfEmail(email)}, cb);
+              ref.set({
+                email: email, 
+                name: name||firstPartOfEmail(email),
+                app: APPNAME
+              }
+                , cb);
+                
             });
           })
           .then(function(/* user */) {

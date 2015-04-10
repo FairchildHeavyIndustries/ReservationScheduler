@@ -3,10 +3,14 @@
 /* verify config settings are present */
 
 describe('config', function() {
-  beforeEach(module('myApp.config'));
+  beforeEach(module('frsApp.config'));
 
   it('should have a valid FBURL', inject(function(FBURL) {
     expect(FBURL).toMatch(/^https:\/\/[a-zA-Z0-9_-]+\.firebaseio\.com$/i);
+  }));
+  
+    it('should have an APPNAME constant', inject(function(APPNAME) {
+    expect(APPNAME).toBe("ProviderManagement");
   }));
 
   it('should have a valid SEMVER version', inject(function(version) {

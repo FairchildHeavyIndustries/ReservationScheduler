@@ -1,8 +1,8 @@
 
-describe('myApp.account', function() {
+describe('frsApp.account', function() {
   beforeEach(function() {
-    module('myApp');
-    module('myApp.account');
+    module('frsApp');
+    module('frsApp.account');
   });
 
   describe('AccountCtrl', function() {

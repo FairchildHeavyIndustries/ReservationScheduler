@@ -1,0 +1,29 @@
+<h2>{{"Provider" | translate}}</h2>
+<i>{{message | translate}}</i>
+<form name="ProviderForm">
+    <fieldset>
+        <label>{{'Name'|translate}}
+            <input type="text" required ng-model="provider.name" />
+        </label>
+        <label>{{'address1'|translate}}
+            <input required ng-model="provider.address1" />
+        </label>
+        <label>{{'address2'|translate}}
+            <input ng-model="provider.address2"/>
+        </label>
+        <label>{{'Unit'|translate}}
+            <input ng-model="provider.unit" />
+        </label>
+        <label>{{'city'|translate}}
+            <input required ng-model="provider.city" />
+        </label>
+        <label>{{'region'|translate}}
+            <input ng-model="provider.region" />
+        </label>
+        <label>{{'zipcode'|translate}}
+            <input ng-model="provider.zipCode" />
+        </label>
+    </fieldset>
+    <button type="submit" ng-if="modifyMode" ng-disabled="ProviderForm.$invalid" ng-click="updateProvider(provider)">{{"save" | translate}}</button>
+    <button type="submit" ng-if="!modifyMode" ng-disabled="ProviderForm.$invalid" ng-click="createProvider(provider)">{{"save" | translate}}</button>
+</form>

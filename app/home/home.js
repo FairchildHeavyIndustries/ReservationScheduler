@@ -1,15 +1,29 @@
 (function(angular) {
   "use strict";
 
-  var app = angular.module('myApp.home', ['firebase.auth', 'firebase', 'firebase.utils', 'ngRoute']);
+  var homeModule = angular.module('frsApp.home', ['firebase.auth', 'firebase', 'firebase.utils', 'ngRoute']);
 
-  app.controller('HomeCtrl', ['$scope', 'fbutil', 'user', '$firebaseObject', 'FBURL', function ($scope, fbutil, user, $firebaseObject, FBURL) {
-    $scope.syncedValue = $firebaseObject(fbutil.ref('syncedValue'));
-    $scope.user = user;
-    $scope.FBURL = FBURL;
-  }]);
+  homeModule.controller('HomeCtrl', ['$scope', 'fbutil', 'user', '$firebaseObject', '$firebaseArray',
+    function HomeCtrl($scope, fbutil, user, $firebaseObject, $firebaseArray) {
+      var providersRef = fbutil.ref('providers');
 
-  app.config(['$routeProvider', function ($routeProvider) {
+      $scope.user = user;
+      $scope.providers = [];
+      if (user) {
+        $scope.profile = $firebaseObject(fbutil.ref('users', user.uid));
+        $scope.profile.$loaded().then(function() {
+          angular.forEach($scope.profile.providers, function(value, key) {
+            providersRef.child(key).once("value", function(providerData) {
+              $scope.providers.push({key: key, name: providerData.child('name').val()});
+              $scope.$apply();
+            })
+          });
+        });
+      }
+    }
+  ]);
+
+  homeModule.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/home', {
       templateUrl: 'home/home.html',
       controller: 'HomeCtrl',
@@ -18,7 +32,7 @@
         // the controller can then inject `user` as a dependency. This could also be done
         // in the controller, but this makes things cleaner (controller doesn't need to worry
         // about auth status or timing of accessing data or displaying elements)
-        user: ['Auth', function (Auth) {
+        user: ['Auth', function(Auth) {
           return Auth.$waitForAuth();
         }]
       }
@@ -26,4 +40,3 @@
   }]);
 
 })(angular);
-

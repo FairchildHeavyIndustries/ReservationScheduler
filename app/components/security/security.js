@@ -5,11 +5,11 @@
   // to be used by authRequired() in the services below
   var securedRoutes = [];
 
-  angular.module('myApp.security', ['ngRoute', 'firebase.auth', 'myApp.config'])
+  angular.module('frsApp.security', ['ngRoute', 'firebase.auth', 'frsApp.config'])
 
     .config(['$routeProvider', function ($routeProvider) {
       // routes which are not in our map are redirected to /home
-      //$routeProvider.otherwise({redirectTo: '/home'});
+      $routeProvider.otherwise({redirectTo: '/home'});
     }])
 
   /**

@@ -1,9 +1,9 @@
 (function (angular) {
   "use strict";
 
-  var app = angular.module('myApp.account', ['firebase', 'firebase.utils', 'firebase.auth', 'ngRoute']);
+  var accountModule = angular.module('frsApp.account', ['firebase', 'firebase.utils', 'firebase.auth', 'ngRoute']);
 
-  app.controller('AccountCtrl', ['$scope', 'Auth', 'fbutil', 'user', '$location', '$firebaseObject',
+  accountModule.controller('AccountCtrl', ['$scope', 'Auth', 'fbutil', 'user', '$location', '$firebaseObject',
     function($scope, Auth, fbutil, user, $location, $firebaseObject) {
       var unbind;
       // create a 3-way binding with the user profile object in Firebase
@@ -64,7 +64,7 @@
     }
   ]);
 
-  app.config(['$routeProvider', function($routeProvider) {
+  accountModule.config(['$routeProvider', function($routeProvider) {
     // require user to be authenticated before they can access this page
     // this is handled by the .whenAuthenticated method declared in
     // components/router/router.js
