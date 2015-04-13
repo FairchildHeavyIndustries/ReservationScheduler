@@ -1,7 +1,7 @@
 module.exports = function(config){
   config.set({
 
-    basePath : '../',
+    basePath : './',
 
     files : [
       'app/bower_components/angular/angular.js',
@@ -17,18 +17,18 @@ module.exports = function(config){
       'app/home/**/*.js',
       'app/login/**/*.js',
       'app/config_test.js',
-      'app/navMenu/**/*.js'
+      'app/navMenu/**/*.js',
+      'app/provider/**/*.js'
     ],
 
     autoWatch : true,
 
     frameworks: ['jasmine'],
 
-   // browsers : ['Chrome'],
+    browsers : ['PhantomJS'],
 
     plugins : [
-            //'karma-chrome-launcher',
-            //'karma-firefox-launcher',
+            'karma-phantomjs-launcher',
             'karma-jasmine',
             'karma-junit-reporter'
             ],
