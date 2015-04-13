@@ -221,4 +221,4 @@ test_out/e2e.xml
 
 #jquery overkill
 app/bower_components/jquery/
-app/bower_components/jquer-ui/
+app/bower_components/jquery-ui/
