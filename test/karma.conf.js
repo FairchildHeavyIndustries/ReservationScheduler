@@ -17,22 +17,24 @@ module.exports = function(config){
       'app/home/**/*.js',
       'app/login/**/*.js',
       'app/config_test.js',
-      'app/navMenu/**/*.js'
+      'app/navMenu/**/*.js',
+      'app/provider/**/*.js'
     ],
 
     autoWatch : true,
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome'],
-    hostname: process.env.IP,
-    port: process.env.PORT,
+    browsers : ['PhantomJS'],
+    //hostname: process.env.IP,
+    //port: process.env.PORT,
 
     plugins : [
             //'karma-chrome-launcher',
             //'karma-firefox-launcher',
             'karma-jasmine',
-            'karma-junit-reporter'
+            'karma-junit-reporter',
+	    'karma-phantomjs-launcher',
             ],
 
     junitReporter : {

@@ -5,16 +5,15 @@
 
   providerModule.controller('ProviderController', ['$scope', 'fbutil', 'user', '$routeParams', '$firebaseObject', '$location',
     function ProviderController($scope, fbutil, user, $routeParams, $firebaseObject, $location) {
-      var providersRef;
-      var userRef = fbutil.ref('users', user.uid);
-      if (!!$routeParams.providerId) {
-        providersRef = fbutil.ref('providers', $routeParams.providerId);
-        $scope.provider = $firebaseObject(providersRef);
-        $scope.modifyMode = true;
-      }
+      var isModify = !!$routeParams.providerId;
+      $scope.modifyMode = isModify;
+      var providersRef = isModify ? fbutil.ref('providers', $routeParams.providerId) : fbutil.ref('providers');
 
-      $scope.createProvider = function(provider) {
-        providersRef = fbutil.ref('providers');
+      var userRef = fbutil.ref('users', user.uid);
+      $scope.provider = isModify ? $firebaseObject(providersRef) : null;
+
+      $scope.createProvider = function() {
+
         var newRef = providersRef.push();
         newRef.set($scope.provider, function(error) {
           if (error) {
@@ -29,7 +28,7 @@
 
       }
 
-      $scope.updateProvider = function(provider) {
+      $scope.updateProvider = function() {
         $scope.provider.$save().then(function(addedProviderRef) {
           $scope.message = "Record_has_been_saved";
         });
