@@ -222,3 +222,6 @@ test_out/e2e.xml
 #jquery overkill
 app/bower_components/jquery/
 app/bower_components/jquery-ui/
+
+#cloud9
+.c9/
