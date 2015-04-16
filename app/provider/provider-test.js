@@ -6,12 +6,7 @@ describe('frsApp.provider', function() {
 
     describe('ProviderController ', function() {
         var providerController, $scope, user, fbutil;
-        MockFirebase.override();
-        beforeEach(module(function($provide) {
-            $provide.value('user', {
-                uid: 'test123'
-            });
-        }));
+        controllerInit();
 
 
         describe('Modify Provider', function() {

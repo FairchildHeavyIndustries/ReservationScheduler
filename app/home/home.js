@@ -3,8 +3,8 @@
 
   var homeModule = angular.module('frsApp.home', ['firebase.auth', 'firebase', 'firebase.utils', 'ngRoute']);
 
-  homeModule.controller('HomeCtrl', ['$scope', 'fbutil', 'user', '$firebaseObject', '$firebaseArray',
-    function HomeCtrl($scope, fbutil, user, $firebaseObject, $firebaseArray) {
+  homeModule.controller('HomeCtrl', ['$scope', 'fbutil', 'user', '$firebaseObject', '$timeout',
+    function HomeCtrl($scope, fbutil, user, $firebaseObject, $timeout) {
       var providersRef = fbutil.ref('providers');
 
       $scope.user = user;
@@ -12,12 +12,17 @@
       if (user) {
         $scope.profile = $firebaseObject(fbutil.ref('users', user.uid));
         $scope.profile.$loaded().then(function() {
-          angular.forEach($scope.profile.providers, function(value, key) {
-            providersRef.child(key).once("value", function(providerData) {
-              $scope.providers.push({key: key, name: providerData.child('name').val()});
-              $scope.$apply();
-            })
-          });
+          $timeout(function() {
+            angular.forEach($scope.profile.providers, function(value, key) {
+              providersRef.child(key).once("value", function(providerData) {
+                $scope.providers.push({
+                  key: key,
+                  name: providerData.child('name').val()
+                });
+                if (!$scope.$$phase) $scope.$apply()
+              })
+            });
+          })
         });
       }
     }

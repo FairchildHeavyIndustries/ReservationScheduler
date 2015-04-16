@@ -9,6 +9,9 @@ module.exports = function(config){
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/mockfirebase/browser/mockfirebase.js',
       'app/bower_components/angularfire/dist/angularfire.js',
+      'app/bower_components/moment/moment.js',  
+      'app/bower_components/angular-moment/angular-moment.js',
+      'app/bower_components/angular-ui-calendar/src/calendar.js',
       'test/lib/**/*.js',
       'app/app.js',
       'app/config.js',
@@ -18,7 +21,8 @@ module.exports = function(config){
       'app/login/**/*.js',
       'app/config_test.js',
       'app/navMenu/**/*.js',
-      'app/provider/**/*.js'
+      'app/provider/**/*.js',
+      'app/schedule/**/*.js'
     ],
 
     autoWatch : true,

@@ -7,7 +7,8 @@
 <h3>{{"Providers" | translate}}</h3>
     <ul ng-repeat="provider in providers">
         <li>
-            <a href="#/provider/update/{{provider.key}}">{{provider.name}}</a>
+            <a href="#/schedule/{{provider.key}}">{{provider.name}}</a>
+            <a href="#/provider/update/{{provider.key}}">{{"Edit" | translate}}</a>
         </li>
     </ul>
 

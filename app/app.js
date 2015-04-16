@@ -8,7 +8,8 @@ angular.module('frsApp', [
     'frsApp.home',
     'frsApp.account',
     'frsApp.login',
-    'frsApp.provider'
+    'frsApp.provider',
+    'frsApp.schedule'
   ])
 
   .run(['$rootScope', 'Auth', function($rootScope, Auth) {
