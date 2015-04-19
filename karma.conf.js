@@ -22,7 +22,8 @@ module.exports = function(config){
       'app/config_test.js',
       'app/navMenu/**/*.js',
       'app/provider/**/*.js',
-      'app/schedule/**/*.js'
+      'app/schedule/**/*.js',
+      'app/countries/**/*.js'
     ],
 
     autoWatch : true,

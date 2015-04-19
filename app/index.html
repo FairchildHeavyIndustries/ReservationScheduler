@@ -16,6 +16,7 @@
   <ul class="menu">
     <li><a href="#/home">{{"home" | translate}}</a></li>
     <li ng-if="!loggedIn"><a href="#/login">{{"log_in" | translate}}</a></li>
+    <li ng-if="!loggedIn"><a href="#/signup">{{"sign_up" | translate}}</a></li>
     <li ng-if="loggedIn"><a href="#/account">{{"account"| translate}}</a></li>
     <li ng-if="loggedIn"><a href="#/home" ng-click="logout()">{{"logout"| translate}}</a></li>
   </ul>
@@ -66,6 +67,7 @@
   <script src="navMenu/navMenu.js"></script>
   <script src="provider/provider.js"></script>
   <script src="schedule/schedule.js"></script>
+  <script src="countries/countries.js"></script>
   
 </body>
 </html>

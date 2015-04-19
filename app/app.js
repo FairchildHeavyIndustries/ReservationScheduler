@@ -9,7 +9,8 @@ angular.module('frsApp', [
     'frsApp.account',
     'frsApp.login',
     'frsApp.provider',
-    'frsApp.schedule'
+    'frsApp.schedule',
+    'frsApp.countries'
   ])
 
   .run(['$rootScope', 'Auth', function($rootScope, Auth) {

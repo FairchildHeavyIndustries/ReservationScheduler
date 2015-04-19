@@ -6,7 +6,7 @@ describe("frsApp.schedule", function() {
     });
     describe("ScheduleController", function() {
         var $scope, $controller, fbutil, uiCalendarConfig, $compile;
-        controllerInit();
+        controllerInit(true);
         beforeEach(inject(function(_$controller_, _fbutil_, _uiCalendarConfig_, _$rootScope_, _$compile_) {
             $controller = _$controller_;
             fbutil = _fbutil_;

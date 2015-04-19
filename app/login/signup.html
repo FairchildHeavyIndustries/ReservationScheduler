@@ -1,0 +1,31 @@
+<h2>{{"Create_Account"| translate}}</h2>
+
+<form>
+    <label>
+        <span>{{"Email"| translate}}</span>
+        <input type="text" ng-model="email" />
+    </label>
+    <label>
+        <span>{{"Account_Name"| translate}}</span>
+        <input type="text" ng-model="account.name" />
+    </label>
+    <label>
+        <span>{{"Country"| translate}}</span>
+        <select ng-model="account.country">
+            <option value="">{{"Select_one" | translate}}...</option>
+            <option ng-repeat="country in countries" value='{{country.code}}' label='{{country.name}}' />
+        </select>
+    </label>
+    <label>
+        <span>{{"Password"| translate}}</span>
+        <input type="password" ng-model="pass" />
+    </label>
+    <label>
+        <span>{{"Confirm_Password"| translate}}</span>
+        <input type="password" ng-model="confirm" />
+    </label>
+    <button ng-click="createAccount()">{{"Create_Account"| translate}}</button>
+
+
+    <p ng-show="err" class="error">{{err}}</p>
+</form>

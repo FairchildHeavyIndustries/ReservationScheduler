@@ -1,19 +1,22 @@
 "use strict";
-angular.module('frsApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
+angular.module('frsApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute', 'frsApp.countries'])
 
-  .config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/login', {
-      controller: 'LoginCtrl',
-      templateUrl: 'login/login.html'
-    });
-  }])
-
-  .controller('LoginCtrl', ['$scope', 'Auth', '$location', 'fbutil', 'APPNAME',
-                    function($scope, Auth, $location, fbutil, APPNAME) {
+  .controller('LoginCtrl', ['$scope', 'Auth', '$location', 'fbutil', 'APPNAME', 'CountryService',
+                    function($scope, Auth, $location, fbutil, APPNAME, countries) {
     $scope.email = null;
     $scope.pass = null;
     $scope.confirm = null;
     $scope.createMode = false;
+    
+    $scope.countries = [];
+    $scope.account = {
+      country: ""
+    };
+    
+    countries.ref().on('child_added', function(snapshot){
+      $scope.countries.push({code: snapshot.key(), name:snapshot.child('name').val()});
+      $scope.$apply();
+    })
 
     $scope.login = function(email, pass) {
       $scope.err = null;
@@ -85,4 +88,14 @@ angular.module('frsApp.login', ['firebase.utils', 'firebase.auth', 'ngRoute'])
       var f = str.charAt(0).toUpperCase();
       return f + str.substr(1);
     }
+  }])
+    .config(['$routeProvider', function($routeProvider) {
+    $routeProvider.when('/login', {
+      controller: 'LoginCtrl',
+      templateUrl: 'login/login.html'
+    });
+    $routeProvider.when('/signup', {
+      templateUrl: 'login/signup.html',
+      controller: 'LoginCtrl'
+    });
   }]);

@@ -1,29 +1,29 @@
 (function(angular) {
   "use strict";
 
-  var homeModule = angular.module('frsApp.home', ['firebase.auth', 'firebase', 'firebase.utils', 'ngRoute']);
+  var homeModule = angular.module('frsApp.home', ['firebase.auth', 'firebase', 'firebase.utils', 'ngRoute', 'frsApp.provider']);
 
-  homeModule.controller('HomeCtrl', ['$scope', 'fbutil', 'user', '$firebaseObject', '$timeout',
-    function HomeCtrl($scope, fbutil, user, $firebaseObject, $timeout) {
-      var providersRef = fbutil.ref('providers');
+  homeModule.controller('HomeCtrl', ['$scope', 'fbutil', 'user', '$firebaseObject', 'ProviderService',
+    function HomeCtrl($scope, fbutil, user, $firebaseObject, ProviderService) {
+      var providersRef = ProviderService.get();
 
-      $scope.user = user;
       $scope.providers = [];
       if (user) {
-        $scope.profile = $firebaseObject(fbutil.ref('users', user.uid));
+        var profileRef = fbutil.ref('users', user.uid)
+        
+        $scope.profile = $firebaseObject(profileRef);
         $scope.profile.$loaded().then(function() {
-          $timeout(function() {
-            angular.forEach($scope.profile.providers, function(value, key) {
-              providersRef.child(key).once("value", function(providerData) {
-                $scope.providers.push({
-                  key: key,
-                  name: providerData.child('name').val()
-                });
-                if (!$scope.$$phase) $scope.$apply()
-              })
-            });
+          angular.forEach($scope.profile.providers, function(value, key) {
+            providersRef.child(key).once("value", function(providerData) {
+
+              $scope.providers.push({
+                key: key,
+                name: providerData.child('name').val()
+              });
+              if (!$scope.$$phase) $scope.$apply()
+            })
           })
-        });
+        })
       }
     }
   ]);

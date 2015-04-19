@@ -11,8 +11,10 @@ MockFirebase.prototype.endAt = function() { return this; };
 
 angular.module('mock.firebase', [])
   .run(function($window) {
+    // console.log('someone is calling mock.firebase run')
     $window.Firebase = $window.MockFirebase;
   })
   .factory('Firebase', function($window) {
+    console.log('someone is calling mock.firebase')
     return $window.MockFirebase;
   });
