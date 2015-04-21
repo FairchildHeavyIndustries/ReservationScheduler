@@ -1,30 +1,30 @@
 <h2>{{"Create_Account"| translate}}</h2>
 
-<form>
+<form name='newAccountForm' novalidate>
     <label>
         <span>{{"Email"| translate}}</span>
-        <input type="text" ng-model="email" />
+        <input type="email" required ng-model="email" name='email' placeholder='{{"Email_is_required"| translate}}'/>
     </label>
     <label>
         <span>{{"Account_Name"| translate}}</span>
-        <input type="text" ng-model="account.name" />
+        <input type="text" required ng-model="account.name" placeholder='{{"Account_Name_is_required"| translate}}'/>
     </label>
     <label>
         <span>{{"Country"| translate}}</span>
-        <select ng-model="account.country">
+        <select ng-model="account.country" required>
             <option value="">{{"Select_one" | translate}}...</option>
             <option ng-repeat="country in countries" value='{{country.code}}' label='{{country.name}}' />
         </select>
     </label>
     <label>
         <span>{{"Password"| translate}}</span>
-        <input type="password" ng-model="pass" />
+        <input type="password" required ng-model="pass" placeholder='{{"Enter_Password"| translate}}'/>
     </label>
     <label>
         <span>{{"Confirm_Password"| translate}}</span>
-        <input type="password" ng-model="confirm" />
+        <input type="password" required ng-model="confirm" placeholder='{{"Confirm_Password"| translate}}'/>
     </label>
-    <button ng-click="createAccount()">{{"Create_Account"| translate}}</button>
+    <button type="submit" ng-disabled="newAccountForm.$invalid" ng-click="createAccount()">{{"Create_Account"| translate}}</button>
 
 
     <p ng-show="err" class="error">{{err}}</p>
